@@ -34,12 +34,16 @@ function Home() {
                     onClick={handleImageClick}
                   />
                   {showLogout && (
+                    <>
                     <button
                       onClick={() => logout({ returnTo: window.location.origin })}
                       className="logout-button"
                     >
                       Logout
                     </button>
+                    
+                    <li className="navbar-item"><a href="#profile">My Profile</a></li>
+                    </>
                   )}
                 </>
               ) : (
