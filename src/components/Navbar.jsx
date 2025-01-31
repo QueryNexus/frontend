@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import logo from './../assets/logo.jpg';
 import "./../styles/Navbar.css";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Navbar() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
@@ -18,6 +19,18 @@ function Navbar() {
     const toggleMenu = () => {
       setMenuOpen(!menuOpen);
     };
+
+    useEffect(() => {
+      if (isAuthenticated && user){
+        axios.post('http://localhost:5173/api/user', user)
+          .then(response => {
+            console.log('User data sent successfully:', response.data);
+          })
+          .catch(error => {
+            console.error('Error sending user data:', error);
+          });
+      }
+    }, [isAuthenticated, user]);  
     
   return (
     <div className="navbar">

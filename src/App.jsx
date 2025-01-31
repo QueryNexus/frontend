@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Auth0Provider } from '@auth0/auth0-react';
+import { Auth0Provider} from '@auth0/auth0-react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Profile from './components/Profile.jsx';
