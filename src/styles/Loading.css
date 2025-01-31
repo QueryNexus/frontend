@@ -1,0 +1,41 @@
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.first {
+  font-size: 2em;
+  font-weight: bold;
+  color: blueviolet;
+  margin-top: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid blueviolet;
+  animation: typing 1s steps(14, end), blink-caret 0.75s step-end infinite;
+}
+
+.second {
+  font-size: 1.5em;
+  color: gray;
+  margin-top: 10px;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 10ch; } /* Adjust the width to match the length of "QueryNexus" */
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: blueviolet; }
+}
+
+.loading p {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333;
+}
