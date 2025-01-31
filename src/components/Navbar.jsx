@@ -7,11 +7,16 @@ import { Link } from 'react-router-dom';
 function Navbar() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
     const [showLogout, setShowLogout] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     console.log(user);
 
     const handleImageClick = () => {
         setShowLogout(!showLogout);
+    };
+
+    const toggleMenu = () => {
+      setMenuOpen(!menuOpen);
     };
     
   return (
@@ -21,8 +26,13 @@ function Navbar() {
             <p>QueryNexus</p>
         </div>
 
-        <ul className="nav-menu">
-            <li className="navbar-item"><Link to='/profile'>Profile</Link></li>
+
+        <button className="menu-button" onClick={toggleMenu}>
+            ☰
+        </button>
+
+        <ul className={`nav-menu ${menuOpen ? 'open' : ''}`}>
+            {isAuthenticated ? <li className="navbar-item"><Link to='/profile'>My Profile</Link></li> : <></>}
 
             <li className="navbar-item">
               {isAuthenticated ? (
@@ -34,16 +44,12 @@ function Navbar() {
                     onClick={handleImageClick}
                   />
                   {showLogout && (
-                    <>
                     <button
                       onClick={() => logout({ returnTo: window.location.origin })}
                       className="logout-button"
                     >
                       Logout
                     </button>
-                    
-                    <li className="navbar-item"><a href="#profile">My Profile</a></li>
-                    </>
                   )}
                 </>
               ) : (
