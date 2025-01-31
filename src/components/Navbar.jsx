@@ -22,7 +22,7 @@ function Navbar() {
 
     useEffect(() => {
       if (isAuthenticated && user){
-        axios.post('http://localhost:5173/api/user', user)
+        axios.post('http://localhost:3000/api/user', user)
           .then(response => {
             console.log('User data sent successfully:', response.data);
           })
