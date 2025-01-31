@@ -5,17 +5,16 @@
     padding: 16px;
     background-color: darkgray;
     width: full;
-    margin: 30px;
+    margin: 10px;
     height: 80px;
     box-sizing: border-box;
-    border-radius: 15px;
+    border-radius: 7px;
 }
 
 .nav-logo{
     display: flex;
     align-items: center;
     gap: 10px;
-    /* margin-right: 800px; */
 }
 .nav-logo img{
     width: 50px;
@@ -76,7 +75,7 @@
     cursor: pointer;
 }
 
-@media(max-width: 300px){
+@media(max-width: 550px){
     .nav-menu{
         display: none;
         flex-direction: column;
@@ -95,4 +94,8 @@
     .menu-button{
         display: block;
     }
+    .nav-logo p{
+    display: none;
+}
+
 }
