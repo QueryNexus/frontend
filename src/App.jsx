@@ -5,7 +5,6 @@ import Navbar from './components/Navbar.jsx';
 import Profile from './components/Profile.jsx';
 import Loading from './components/Loading.jsx';
 import './App.css';
-// import authConfig from './config/auth_config.json';
 
 function App() {
   const [loading, setLoading] = useState(true);
