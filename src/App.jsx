@@ -5,7 +5,7 @@ import Navbar from './components/Navbar.jsx';
 import Profile from './components/Profile.jsx';
 import Loading from './components/Loading.jsx';
 import './App.css';
-import authConfig from './config/auth_config.json';
+// import authConfig from './config/auth_config.json';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -25,8 +25,8 @@ function App() {
 
   return (
     <Auth0Provider
-      domain={authConfig.domain}
-      clientId={authConfig.clientId}
+    domain={import.meta.env.VITE_AUTH0_DOMAIN}
+    clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
       redirectUri={window.location.origin}
     >
       <BrowserRouter>
