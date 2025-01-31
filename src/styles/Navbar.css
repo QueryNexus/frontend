@@ -70,9 +70,12 @@
 .menu-button{
     display: none;
     font-size: 24px;
-    background: none;
-    border: none;
+    background: black;
+    border: 2px solid black;
     cursor: pointer;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 @media(max-width: 550px){
@@ -94,8 +97,10 @@
     .menu-button{
         display: block;
     }
-    .nav-logo p{
-    display: none;
 }
 
+@media(max-width: 420px){
+    .nav-logo p{
+        display: none;
+    }
 }
