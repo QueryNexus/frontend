@@ -1,12 +1,17 @@
 import React from 'react';
 import "./../styles/MainPage.css";
+import user_image from "./../assets/user_image.png";
 
 function MainPage() {
   return (
-    <div>
+    <div className="main-page">
       <div className="top">
-        <div className="user-logo">
-          <img src="" alt="" />
+        <img src={user_image} alt="user image" className="user-logo"/>
+        
+        <div className="user-info">
+          <p>Company Name : XYZ</p>
+          <p>Company Address : XYZ city</p>
+          <p>Company Email : xyz@vscode.com</p>
         </div>
       </div>
 
