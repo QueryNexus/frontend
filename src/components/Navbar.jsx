@@ -4,6 +4,8 @@ import logo from './../assets/logo.jpg';
 import "./../styles/Navbar.css";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Landing from './Landing';
+import MainPage from './MainPage';
 
 function Navbar() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
@@ -33,46 +35,56 @@ function Navbar() {
     }, [isAuthenticated, user]);  
     
   return (
-    <div className="navbar">
-        <div className="nav-logo">
-            <img src={logo} alt="Logo" className="logo" />
-            <p>QueryNexus</p>
-        </div>
+    <>
+      <div className="navbar">
+          <div className="nav-logo">
+              <img src={logo} alt="Logo" className="logo" />
+              <p>QueryNexus</p>
+          </div>
 
 
-        <button className="menu-button" onClick={toggleMenu}>
-            ☰
-        </button>
+          <button className="menu-button" onClick={toggleMenu}>
+              ☰
+          </button>
 
-        <ul className={`nav-menu ${menuOpen ? 'open' : ''}`}>
-            {isAuthenticated ? <li className="navbar-item"><Link to='/profile'>My Profile</Link></li> : <></>}
+          <ul className={`nav-menu ${menuOpen ? 'open' : ''}`}>
+              {isAuthenticated ? <li className="navbar-item"><Link to='/profile'>My Profile</Link></li> : <></>}
 
-            <li className="navbar-item">
-              {isAuthenticated ? (
-                <>
-                  <img
-                    src={user.picture}
-                    alt={user.name}
-                    className="user-image"
-                    onClick={handleImageClick}
-                  />
-                  {showLogout && (
-                    <button
-                      onClick={() => logout({ returnTo: window.location.origin })}
-                      className="logout-button"
-                    >
-                      Logout
-                    </button>
-                  )}
-                </>
-              ) : (
-                <button onClick={() => loginWithRedirect()} className="login-button">
-                  Login
-                </button>
-              )}
-            </li>
-        </ul>
-    </div>
+              <li className="navbar-item">
+                {isAuthenticated ? (
+                  <>
+                    <img
+                      src={user.picture}
+                      alt={user.name}
+                      className="user-image"
+                      onClick={handleImageClick}
+                    />
+                    {showLogout && (
+                      <button
+                        onClick={() => logout({ returnTo: window.location.origin })}
+                        className="logout-button"
+                      >
+                        Logout
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <button onClick={() => loginWithRedirect()} className="login-button">
+                    Login
+                  </button>
+                )}
+              </li>
+          </ul>
+      </div>
+
+      {!isAuthenticated && (
+        <Landing />
+      )}
+
+      {isAuthenticated && (
+        <MainPage />
+      )}
+    </>
   )
 }
 

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Profile from './components/Profile.jsx';
 import Loading from './components/Loading.jsx';
+// import Landing from './components/Landing.jsx';
 import './App.css';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <div className="container">
           <Navbar />
           <Routes>
+            {/* <Route path="/" element={<Landing />}></Route> */}
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>

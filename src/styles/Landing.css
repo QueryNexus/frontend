@@ -1,0 +1,28 @@
+/* .not-logged-in {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 4px solid #f5c6cb;
+  border-radius: 5px;
+  text-align: center;
+} */
+
+/* filepath: /c:/Git_Projects/sem-6-querynexus/frontend/src/components/Landing.css */
+.landing {
+  text-align: center;
+  margin-top: 20px;
+  margin: 10px;
+  border: 4px solid white;
+  border-radius: 7px;
+  height: 100%;
+}
+
+.landing h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.landing p {
+  font-size: 1.2em;
+}
