@@ -1,0 +1,13 @@
+.top{
+    border: 1px solid white;
+    margin: 10px;
+    border-radius: 7px;
+    height: 100%;
+}
+
+.bottom{
+    border: 1px solid white;
+    margin: 10px;
+    border-radius: 7px;
+    height: 100%;
+}
