@@ -61,7 +61,7 @@ function Navbar() {
                     />
                     {showLogout && (
                       <button
-                        onClick={() => logout({ returnTo: window.location.origin })}
+                        onClick={() => logout({ returnTo: "https://querynexus.netlify.app/" })}
                         className="logout-button"
                       >
                         Logout
