@@ -27,7 +27,7 @@ function App() {
     <Auth0Provider
     domain={import.meta.env.VITE_AUTH0_DOMAIN}
     clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
-      redirectUri={window.location.origin}
+      redirectUri={'https://querynexus.github.io/frontend'}
     >
       <BrowserRouter>
         <div className="container">
