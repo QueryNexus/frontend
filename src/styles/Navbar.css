@@ -10,7 +10,7 @@
     box-sizing: border-box;
     border-radius: 7px;
 }
-
+  
 .nav-logo{
     display: flex;
     align-items: center;
@@ -26,6 +26,18 @@
     color: blueviolet;
     font-size: 38px;
     font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .nav-logo p{
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo p{
+        font-size: 1.5rem;
+    }
 }
 
 .nav-menu{

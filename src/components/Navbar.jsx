@@ -39,7 +39,7 @@ function Navbar() {
       <div className="navbar">
           <div className="nav-logo">
               <img src={logo} alt="Logo" className="logo" />
-              <p>QueryNexus</p>
+              <p className="app-title">QueryNexus</p>
           </div>
 
 
