@@ -23,8 +23,6 @@ function App() {
     return <Loading />;
   }
 
-  console.log(window.location.origin);
-
   return (
     <Auth0Provider
     domain={import.meta.env.VITE_AUTH0_DOMAIN}
