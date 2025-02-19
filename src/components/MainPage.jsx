@@ -2,16 +2,18 @@ import React, {useState} from 'react';
 import "./../styles/MainPage.css";
 import user_image from "./../assets/user_image.png";
 import axios from 'axios';
+import AddSite from './AddSite';
 
 function MainPage() {
-  const [showModal, setShowModal] = useState(false);
+  const [showAddSite, setShowAddSite] = useState(false);
+  // const [showSite, setShowSite] = useState(false);
 
   const handleAddButtonClick = () => {
-    setShowModal(true);
+    setShowAddSite(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseAddSite = () => {
+    setShowAddSite(false);
   };
 
   const [websites, setWebsites] = useState([
@@ -38,7 +40,7 @@ function MainPage() {
       // Update the state with the new website entry
       setWebsites([...websites, newWebsite]);
       setNewWebsite({ name: '', url: '' });
-      setShowModal(false);
+      setShowAddSite(false);
     } catch (error) {
       console.error('Error sending data to backend:', error);
     }
@@ -80,25 +82,13 @@ function MainPage() {
         <span>Add</span>
       </button>
 
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Add New Website</h2>
-            <form onSubmit={handleFormSubmit}>
-              <label>
-                Website Name:
-                <input type="text" name="name" value={newWebsite.name} onChange={handleInputChange}/>
-              </label>
-              <label>
-                Website URL:
-                <input type="text" name="url" value={newWebsite.url} onChange={handleInputChange}/>
-              </label>
-              <button type="button" onClick={handleCloseModal}>Close</button>
-              <button type="submit">Add</button>
-            </form>
-          </div>
-        </div>
-      )}
+      <AddSite
+        showAddSite={showAddSite}
+        handleCloseAddSite={handleCloseAddSite}
+        handleFormSubmit={handleFormSubmit}
+        handleInputChange={handleInputChange}
+        newWebsite={newWebsite}
+      />
 
     </div>
   )
