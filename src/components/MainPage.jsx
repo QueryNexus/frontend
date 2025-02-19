@@ -1,8 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./../styles/MainPage.css";
 import user_image from "./../assets/user_image.png";
+import axios from 'axios';
 
 function MainPage() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleAddButtonClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const [websites, setWebsites] = useState([
+    { name: 'Google', url: 'https://www.google.com' },
+    { name: 'ChatGPT', url: 'https://chat.openAI.com' },
+    { name: 'Youtube', url: 'https://m.youtube.com' },
+    { name: 'Docs', url: 'https://docs.google.com' },
+  ]);
+
+  const [newWebsite, setNewWebsite] = useState({ name: '', url: '' });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewWebsite({ ...newWebsite, [name]: value });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Send the new website entry to the backend
+      const response = await axios.post('http://localhost:3000/api/newSite', newWebsite);
+      console.log('Response from backend:', response.data);
+
+      // Update the state with the new website entry
+      setWebsites([...websites, newWebsite]);
+      setNewWebsite({ name: '', url: '' });
+      setShowModal(false);
+    } catch (error) {
+      console.error('Error sending data to backend:', error);
+    }
+  };
+
   return (
     <div className="main-page">
       <div className="top">
@@ -18,13 +59,47 @@ function MainPage() {
       <div className="bottom">
         <p>My Websites</p>
         <ul>
-          <li>My Website url</li>
-          <li>My Website url</li>
-          <li>My Website url</li>
-          <li>My Website url</li>
-          <li>My Website url</li>
+          {websites.map((website, index) => (
+            <li key={index} id="sites">
+              {website.name} : <a href={website.url} target="_blank" rel="noopener noreferrer">{website.url}</a>
+            </li>
+          ))}
         </ul>
       </div>
+
+      <button class="cssbuttons-io-button" onClick={handleAddButtonClick}>
+        <svg
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+        <path d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
+        </svg>
+        <span>Add</span>
+      </button>
+
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Add New Website</h2>
+            <form onSubmit={handleFormSubmit}>
+              <label>
+                Website Name:
+                <input type="text" name="name" value={newWebsite.name} onChange={handleInputChange}/>
+              </label>
+              <label>
+                Website URL:
+                <input type="text" name="url" value={newWebsite.url} onChange={handleInputChange}/>
+              </label>
+              <button type="button" onClick={handleCloseModal}>Close</button>
+              <button type="submit">Add</button>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }
