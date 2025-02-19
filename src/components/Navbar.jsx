@@ -92,10 +92,6 @@ function Navbar() {
       {isAuthenticated && !profileOpen && (
         <MainPage />
       )}
-
-      {isAuthenticated && !profileOpen &&(
-        <Profile />
-      )}
     </>
   )
 }
