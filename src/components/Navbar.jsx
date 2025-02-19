@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Landing from './Landing';
 import MainPage from './MainPage';
+import Profile from './Profile';
 
 function Navbar() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
     const [showLogout, setShowLogout] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [profileOpen, setProfileOpen] = useState(false);
 
     console.log(user);
 
@@ -21,6 +23,10 @@ function Navbar() {
     const toggleMenu = () => {
       setMenuOpen(!menuOpen);
     };
+
+    const handleProfileClick = () => {
+      setProfileOpen(!profileOpen);
+    }
 
     useEffect(() => {
       if (isAuthenticated && user){
@@ -48,7 +54,9 @@ function Navbar() {
           </button>
 
           <ul className={`nav-menu ${menuOpen ? 'open' : ''}`}>
-              {isAuthenticated ? <li className="navbar-item"><Link to='/profile'>My Profile</Link></li> : <></>}
+              {isAuthenticated && !profileOpen ? <li className="navbar-item" onClick={handleProfileClick}><Link to='/profile'>My Profile</Link></li> : <></>}
+
+              {isAuthenticated && profileOpen ? <li className="navbar-item" onClick={handleProfileClick}><Link to='/'>Dashboard</Link></li> : <></>}
 
               <li className="navbar-item">
                 {isAuthenticated ? (
@@ -81,8 +89,12 @@ function Navbar() {
         <Landing />
       )}
 
-      {isAuthenticated && (
+      {isAuthenticated && !profileOpen && (
         <MainPage />
+      )}
+
+      {isAuthenticated && !profileOpen &&(
+        <Profile />
       )}
     </>
   )
