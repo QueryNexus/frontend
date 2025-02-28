@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Landing from './Landing';
 import MainPage from './MainPage';
-import Profile from './Profile';
+// import Profile from './Profile'; 
 
 function Navbar() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
@@ -30,7 +30,17 @@ function Navbar() {
 
     useEffect(() => {
       if (isAuthenticated && user){
-        axios.post('http://localhost:3000/api/user', user)
+        const userData = {
+          uid: user.sub,
+          email: user.email,
+          name: user.name,
+          photo: user.picture
+        };
+        axios.post('http://localhost:8080/user', userData, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
           .then(response => {
             console.log('User data sent successfully:', response.data);
           })
@@ -38,7 +48,7 @@ function Navbar() {
             console.error('Error sending user data:', error);
           });
       }
-    }, [isAuthenticated, user]);  
+    }, [isAuthenticated, user]);    
     
   return (
     <>
