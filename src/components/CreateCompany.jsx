@@ -256,6 +256,8 @@ function CreateCompany({ onSuccess }) {
         />
         </div>
 
+        <div className="field-divs">
+        <label>Company Size</label>
         <select className="select-box"
           name="company_size"
           value={companyData.company_size}
@@ -269,6 +271,7 @@ function CreateCompany({ onSuccess }) {
           <option value="501-1000">501-1000</option>
           <option value="1000+">1000+</option>
         </select>
+        </div>
 
         <div className="field-divs">
         <label>Contact Email</label>
@@ -417,6 +420,7 @@ function CreateCompany({ onSuccess }) {
         />
         </div>
 
+        <div className="field-divs">
         {companyData.other_branches.map((branch, index) => (
           <div key={index} className="branch">
             <label>Branch Name</label>
@@ -455,6 +459,7 @@ function CreateCompany({ onSuccess }) {
             </button>
           </div>
         ))}
+        </div>
 
         <div className="field-divs">
         <label>Logo URL</label>
@@ -467,6 +472,8 @@ function CreateCompany({ onSuccess }) {
         />
         </div>
 
+
+        <div className="field-divs">
         {companyData.other_details.map((detail, index) => (
           <div key={index} className="other-detail">
             <label>Parameter {index}</label>
@@ -496,6 +503,7 @@ function CreateCompany({ onSuccess }) {
             </button>
           </div>
         ))}
+        </div>
 
         <button type="submit">Create Company</button>
       </form>
