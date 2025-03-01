@@ -1,32 +1,44 @@
 .create-company {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   padding: 20px;
-  background: #f9f9f9;
+  background: black;
+  color: white;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .create-company h2 {
-  margin-top: 0;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 400;
+  align-self: center;
 }
 
 .create-company form {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.create-company label {
-  margin-bottom: 10px;
-  color: black;
-}
-
-.create-company input,
-.create-company textarea,
-.create-company select {
-  padding: 8px;
+input, textarea, select {
+  height: 3rem;
+  width: 20rem;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-left: 20px;
   margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  /* border: 1px solid red; */
+  border-radius: 50px;
+  background: grey;
+  cursor: pointer;
 }
+textarea {
+  resize: none;
+}
+
 
 .create-company button {
   margin-top: 10px;
@@ -38,43 +50,21 @@
   color: white;
 }
 
-/* Responsive styles */
-@media (min-width: 600px) {
-  .create-company form {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .create-company label {
-    flex: 1 1 45%;
-    margin-right: 10px;
-  }
-
-  .create-company label:nth-child(2n) {
-    margin-right: 0;
-  }
-
-  .create-company button {
-    flex: 1 1 100%;
-  }
+input{
+  background: grey;
+  color: white;
 }
 
-@media (min-width: 900px) {
-  .create-company form {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .create-company label {
-    flex: 1 1 30%;
-    margin-right: 10px;
-  }
-
-  .create-company label:nth-child(3n) {
-    margin-right: 0;
-  }
-
-  .create-company button {
-    flex: 1 1 100%;
-  }
+::placeholder {
+  color: white;
+  align-self: center;
 }
+
+.field-divs {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+ label{
+  margin-left: 10px;
+ }
