@@ -2,13 +2,15 @@ import React, {useState, useEffect} from 'react';
 import "./../styles/MainPage.css";
 import user_image from "./../assets/user_image.png";
 import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 import AddSite from './AddSite';
 import CreateCompany from './CreateCompany';
 
 function MainPage() {
+  const { user, isAuthenticated } = useAuth0();
   const [showAddSite, setShowAddSite] = useState(false);
   const [isCompany, setIsCompany] = useState(false);
-  const [companyData, setCompanyData] = useState(null);
+  const [companyData, setCompanyData] = useState({id: '', name: ''});
 
   // const [showSite, setShowSite] = useState(false);
 
@@ -21,20 +23,28 @@ function MainPage() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8080/user')
+    axios.post('http://localhost:8080/usercompany', {uid:user.sub})
       .then(response => {
         console.log(response.data);
-        if (response.data.isCompany) {
+        if (response.data.companyIds && response.data.companyIds.length > 0) {
           setIsCompany(true);
+          setCompanyData({
+            id: response.data.companyIds[0]._id,
+            name: response.data.companyIds[0].name
+          });
+          console.log("company data : ", companyData);
         }
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
       });
-  }, []);
+  }, [isAuthenticated, user]);
 
   const handleCompanyData = (data) => {
-    setCompanyData(data);
+    setCompanyData({
+      id: data.companyIds[0]._id,
+      name: data.companyIds[0].name
+    });
     console.log('Company data:', data);
     setIsCompany(true);
   };
@@ -78,7 +88,8 @@ function MainPage() {
           <img src={user_image} alt="user image" className="user-logo"/>
           
           <div className="user-info">
-            <p>Company Name : XYZ</p>
+            <p>Company ID : {companyData.id}</p>
+            <p>Company Name : {companyData.name}</p>
             <p>Company Address : XYZ city</p>
             <p>Company Email : xyz@vscode.com</p>
           </div>
