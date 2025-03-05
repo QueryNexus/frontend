@@ -36,7 +36,7 @@ function Navbar() {
           name: user.name,
           photo: user.picture
         };
-        axios.post('http://localhost:8080/user', userData, {
+        axios.post('https://brwv0k8oof.execute-api.ap-south-1.amazonaws.com/development-deploy/user', userData, {
           headers: {
             'Content-Type': 'application/json'
           }

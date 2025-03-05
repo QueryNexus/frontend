@@ -23,7 +23,7 @@ function MainPage() {
   };
 
   useEffect(() => {
-    axios.post('http://localhost:8080/usercompany', {uid:user.sub})
+    axios.post('https://brwv0k8oof.execute-api.ap-south-1.amazonaws.com/development-deploy/usercompany', {uid:user.sub})
       .then(response => {
         console.log(response.data);
         if (response.data.companyIds && response.data.companyIds.length > 0) {
