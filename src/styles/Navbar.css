@@ -9,6 +9,8 @@
     height: 80px;
     box-sizing: border-box;
     border-radius: 7px;
+    position: fixed;
+    top: 0;
 }
   
 .nav-logo{

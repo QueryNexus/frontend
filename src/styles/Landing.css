@@ -1,28 +1,74 @@
-/* .not-logged-in {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 4px solid #f5c6cb;
-  border-radius: 5px;
-  text-align: center;
-} */
-
-/* filepath: /c:/Git_Projects/sem-6-querynexus/frontend/src/components/Landing.css */
-.landing {
-  text-align: center;
-  margin-top: 20px;
-  margin: 10px;
-  border: 4px solid white;
-  border-radius: 7px;
-  height: 100%;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: #333;
 }
 
-.landing h1 {
-  font-size: 2.5em;
+.landing-page {
+  text-align: center;
+  padding-bottom: 60px; /* Add padding to the bottom to prevent footer overlap */
+}
+
+.hero {
+  background: url('https://source.unsplash.com/1600x900/?technology,ai') no-repeat center center/cover;
+  color: white;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
   margin-bottom: 20px;
 }
 
-.landing p {
-  font-size: 1.2em;
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}
+
+.cta-button {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cta-button:hover {
+  background-color: #21a1f1;
+}
+
+.features, .about, .contact {
+  padding: 50px 20px;
+  color: white;
+}
+
+.features h2, .about h2, .contact h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.feature {
+  margin-bottom: 20px;
+}
+
+.feature h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.footer {
+  background-color: #282c34;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
