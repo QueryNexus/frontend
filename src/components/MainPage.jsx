@@ -5,12 +5,14 @@ import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import AddSite from './AddSite';
 import CreateCompany from './CreateCompany';
+import SiteDashboard from './SiteDashboard';
 
 function MainPage() {
   const { user, isAuthenticated } = useAuth0();
   const [showAddSite, setShowAddSite] = useState(false);
   const [isCompany, setIsCompany] = useState(false);
   const [companyData, setCompanyData] = useState({id: '', name: ''});
+  const [selectedSite, setSelectedSite] = useState(null);
 
   // const [showSite, setShowSite] = useState(false);
 
@@ -20,6 +22,10 @@ function MainPage() {
 
   const handleCloseAddSite = () => {
     setShowAddSite(false);
+  };
+
+  const handleSiteClick = (site) => {
+    setSelectedSite(site);
   };
 
   useEffect(() => {
@@ -84,48 +90,54 @@ function MainPage() {
     <>
       {isCompany && (
       <div className="main-page">
-        <div className="top">
-          <img src={user_image} alt="user image" className="user-logo"/>
-          
-          <div className="user-info">
-            <p>Company ID : {companyData.id}</p>
-            <p>Company Name : {companyData.name}</p>
-            <p>Company Address : XYZ city</p>
-            <p>Company Email : xyz@vscode.com</p>
-          </div>
-        </div>
+        {/* Render SiteDashboard if a site is selected */}
+        {selectedSite ? (
+          <SiteDashboard siteName={selectedSite.name} />
+        ) : (
+          <>
+            <div className="top">
+              <img src={user_image} alt="user image" className="user-logo"/>
+              <div className="user-info">
+                <p>Company ID : {companyData.id}</p>
+                <p>Company Name : {companyData.name}</p>
+                <p>Company Address : XYZ city</p>
+                <p>Company Email : xyz@vscode.com</p>
+              </div>
+            </div>
 
-        <div className="bottom">
-          <p>My Websites</p>
-          <ul>
-            {websites.map((website, index) => (
-              <li key={index} id="sites">
-                {website.name} : <a href={website.url} target="_blank" rel="noopener noreferrer">{website.url}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
+            <div className="bottom">
+              <p>My Websites</p>
+              <ul>
+                {websites.map((website, index) => (
+                  <li key={index} id="sites" onClick={() => handleSiteClick(website)}>
+                    {website.name} : <a href={website.url} target="_blank" rel="noopener noreferrer">{website.url}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        <button class="cssbuttons-io-button" onClick={handleAddButtonClick}>
-          <svg
-            height="24"
-            width="24"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-          <path d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
-          </svg>
-          <span>Add</span>
-        </button>
+            <button class="cssbuttons-io-button" onClick={handleAddButtonClick}>
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
+              </svg>
+              <span>Add</span>
+            </button>
 
-        <AddSite
-          showAddSite={showAddSite}
-          handleCloseAddSite={handleCloseAddSite}
-          handleFormSubmit={handleFormSubmit}
-          handleInputChange={handleInputChange}
-          newWebsite={newWebsite}
-        />
+            <AddSite
+              showAddSite={showAddSite}
+              handleCloseAddSite={handleCloseAddSite}
+              handleFormSubmit={handleFormSubmit}
+              handleInputChange={handleInputChange}
+              newWebsite={newWebsite}
+            />
+          </>
+        )}
       </div>
       )}
 
