@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./../styles/CreateCompany.css";
+import { useNavigate } from "react-router-dom";
 
-function CreateCompany({ onSuccess }) {
+function CreateCompany() {
   const { user, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
   const [companyData, setCompanyData] = useState({
     uid: user.sub,
     name: "",
@@ -133,9 +135,10 @@ function CreateCompany({ onSuccess }) {
         }
       );
       console.log("Company data sent successfully:", response.data);
-      onSuccess(response.data);
+      navigate('/dashboard');
     } catch (error) {
       console.error("Error sending company data:", error);
+      alert("Error sending company data. Please try again.");
     }
   };
 

@@ -1,50 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Auth0Provider} from '@auth0/auth0-react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar.jsx';
-import Profile from './components/Profile.jsx';
-import Loading from './components/Loading.jsx';
-import SiteDashboard from './components/SiteDashboard.jsx';
-import AddSite from './components/AddSite.jsx';
+import { useState } from 'react'
+import './App.css'
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import Navbar from "./components/Navbar";
+import Landing from "./pages/Landing";
+import MainPage from "./pages/MainPage";
+import Profile from "./pages/Profile";
+import AddSite from './pages/AddSite';
+import CreateCompany from './pages/CreateCompany';
+import SiteDashboard from './pages/SiteDashboard';
 
-// import Landing from './components/Landing.jsx';
-import './App.css';
+const ProtectedRoute = ({ element }) => {
+  const { isAuthenticated } = useAuth0();
+  return isAuthenticated ? element : <Navigate to="/" />;
+};
+
+const PublicRoute = ({ element }) => {
+  const { isAuthenticated } = useAuth0();
+  return !isAuthenticated ? element : <Navigate to="/dashboard" />;
+};
+
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate a loading delay
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2500); // Adjust the delay as needed
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
-    <Auth0Provider
-    domain={import.meta.env.VITE_AUTH0_DOMAIN}
-    clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
-      redirectUri={window.location.origin}
-    >
-      <BrowserRouter>
-        <div className="container">
-          <Navbar />
-          <Routes>
-            {/* <Route path="/" element={<Landing />}></Route> */}
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/site-dashboard" element={<SiteDashboard/>} />
-            <Route path="/add-site" element={<AddSite />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </Auth0Provider>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<PublicRoute element={<Landing />} />} />
+        <Route path="/dashboard" element={<ProtectedRoute element={<MainPage />} />} />
+        <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
+        <Route path="/add-site" element={<ProtectedRoute element={<AddSite />} />} />
+        <Route path="/create-company" element={<ProtectedRoute element={<CreateCompany />} />} />
+        <Route path="/site-dashboard" element={<ProtectedRoute element={<SiteDashboard />} />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
+export default App

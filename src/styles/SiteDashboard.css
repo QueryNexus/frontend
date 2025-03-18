@@ -1,0 +1,65 @@
+.site-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.left-navbar {
+  width: 15%;
+  height: 81vh;
+  background-color: grey;
+  position: fixed;
+  left: 10px;
+  padding-left: 20px;
+  padding-top: 30px;
+  border-radius: 10px;
+}
+
+.nav-items {
+  list-style-type: none;
+  color: green;
+  padding: 20px;
+}
+
+.nav-item {
+  cursor: pointer;
+  margin-top: 5vw;
+}
+
+.nav-item:hover {
+  background-color: #ddd;
+  padding: 5px;
+}
+
+.nav-item.active {
+  background-color: #ccc;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.right-content {
+  width: 80%;
+  height: 80vh;
+  right: 10px;
+  margin-left: 20%;
+  background-color: grey;
+  padding: 20px;
+  border-radius: 10px;
+  position: fixed;
+}
+
+.edit-button, .save-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-button:hover, .save-button:hover {
+  background-color: #0056b3;
+}
