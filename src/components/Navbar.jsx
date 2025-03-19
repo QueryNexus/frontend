@@ -4,8 +4,6 @@ import logo from './../assets/logo.jpg';
 import "./../styles/Navbar.css";
 import { Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-// import Landing from './Landing';
-// import MainPage from './MainPage'; 
 
 function Navbar() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
@@ -29,28 +27,34 @@ function Navbar() {
     }
 
     useEffect(() => {
-      if (isAuthenticated && user){
-        const userData = {
-          uid: user.sub,
-          email: user.email,
-          name: user.name,
-          photo: user.picture
-        };
-        axios.post('https://brwv0k8oof.execute-api.ap-south-1.amazonaws.com/development-deploy/user', userData, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(response => {
+      const getUserData = async() => {
+        if (isAuthenticated && user){
+          const userData = {
+            uid: user.sub,
+            email: user.email,
+            name: user.name,
+            photo: user.picture
+          };
+
+          try{
+            const response = await axios.post('http://localhost:8080/user', userData, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
             console.log('User data sent successfully:', response.data);
-          })
-          .catch(error => {
+            navigate('/dashboard');
+          }
+          catch (error) {
             console.error('Error sending user data:', error);
-          });
-        navigate('/dashboard');
-      }
-    }, [isAuthenticated, user]);
-    
+          }
+        }
+      };
+
+      getUserData();
+    }, [isAuthenticated, user, navigate]);
+      
+
   return (
     <div className="navbar">
         <div className="nav-logo">

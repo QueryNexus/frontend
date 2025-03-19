@@ -20,7 +20,7 @@ function MainPage() {
 
   const handleSiteClick = (site) => {
     console.log("Site to send : ",site)
-    navigate('/site-dashboard', {state:{ site }});
+    navigate(`/site-dashboard/${site.id}`);
   };
 
   const handleAddSiteClick = () => {
@@ -28,33 +28,30 @@ function MainPage() {
   }
 
   useEffect(() => {
-    axios.post('https://brwv0k8oof.execute-api.ap-south-1.amazonaws.com/development-deploy/usercompany', { uid: user.sub })
-      .then(response => {
-        console.log(response.data);
+    const fetchData = async () => {
+      try{
+        const response = await axios.post('http://localhost:8080/usercompany', { uid: user.sub });
+        console.log("Checked User Company : ", response.data);
         if (response.data.companyIds && response.data.companyIds.length > 0) {
           setIsCompany(true);
           setCompanyData({
             id: response.data.companyIds[0]._id,
             name: response.data.companyIds[0].name
           });
+          console.log("Company ids : ", companyData)
         }
         else {
           navigate('/create-company');
         }
-      })
-      .catch(error => {
+      }
+      catch(error){
         console.error('Error fetching user data:', error);
-      });
-  }, [isAuthenticated, user]);
-
-  const handleCompanyData = (data) => {
-    setCompanyData({
-      id: data.companyIds[0]._id,
-      name: data.companyIds[0].name
-    });
-    console.log('Company data:', data);
-    setIsCompany(true);
+      }
   };
+  if (isAuthenticated) {
+    fetchData();
+  }
+  }, [isAuthenticated, user, navigate]);
 
   return (
     <div className="main-page">
@@ -63,7 +60,7 @@ function MainPage() {
         <div className="user-info">
           <p>User ID : {user.sub}</p>
           <p>Name : {user.name}</p>
-          <p>Email : </p>
+          <p>Email : {user.email}</p>
         </div>
       </div>
 

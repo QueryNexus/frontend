@@ -44,7 +44,7 @@ function MyCompany({ site, setSite }) {
       ) : (
         <>
           <p>Name: {site.name}</p>
-          <p>URL: <a href={site.url} target="_blank" rel="noopener noreferrer">{site.url}</a></p>
+          <p>URL: <a href={site.website} target="_blank" rel="noopener noreferrer">{site.website}</a></p>
           <p>Description: {site.description}</p>
           <button className="edit-button" onClick={handleEditClick}>Edit</button>
         </>
