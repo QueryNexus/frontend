@@ -20,7 +20,6 @@ const PublicRoute = ({ element }) => {
   return !isAuthenticated ? element : <Navigate to="/dashboard" />;
 };
 
-
 function App() {
   return (
     <Router>
@@ -31,7 +30,7 @@ function App() {
         <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
         <Route path="/add-site" element={<ProtectedRoute element={<AddSite />} />} />
         <Route path="/create-company" element={<ProtectedRoute element={<CreateCompany />} />} />
-        <Route path="/site-dashboard" element={<ProtectedRoute element={<SiteDashboard />} />} />
+        <Route path="/site-dashboard/:id" element={<ProtectedRoute element={<SiteDashboard />} />} />
       </Routes>
     </Router>
   );
