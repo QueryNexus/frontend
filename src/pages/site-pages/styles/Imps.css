@@ -1,0 +1,36 @@
+.info {
+  padding: 20px;
+}
+
+.queries-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.query-info {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: calc(33.333% - 40px); /* Adjust the width as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.query-info h2 {
+  margin-top: 0;
+}
+
+.query-info button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.query-info button:hover {
+  background-color: #0056b3;
+}
