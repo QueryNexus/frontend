@@ -7,20 +7,12 @@ import { useNavigate } from 'react-router-dom';
 
 function MainPage() {
   const { user, isAuthenticated } = useAuth0();
-  const [isCompany, setIsCompany] = useState(false);
-  const [companyData, setCompanyData] = useState({ id: '', name: '', sites: ''});
-  const [websites, setWebsites] = useState([
-    { id: 1, name: 'Google', url: 'https://www.google.com', description: 'Search engine' },
-    { id: 2, name: 'ChatGPT', url: 'https://chat.openAI.com', description: 'AI chatbot' },
-    { id: 3, name: 'Youtube', url: 'https://m.youtube.com', description: 'Video platform' },
-    { id: 4, name: 'Docs', url: 'https://docs.google.com', description: 'Document editor' },
-  ]);
+ const [websites, setWebsites] = useState([]);
 
   const navigate = useNavigate();
 
   const handleSiteClick = (site) => {
-    console.log("Site to send : ",site)
-    navigate(`/site-dashboard/${site.id}`);
+    navigate(`/site-dashboard/${site._id}`);
   };
 
   const handleAddSiteClick = () => {
@@ -30,15 +22,11 @@ function MainPage() {
   useEffect(() => {
     const fetchData = async () => {
       try{
-        const response = await axios.post('http://localhost:8080/usercompany', { uid: user.sub });
+        const response = await axios.post('https://backend-snowy-mu.vercel.app/usercompany', { uid: user.sub });
         console.log("Checked User Company : ", response.data);
+        
         if (response.data.companyIds && response.data.companyIds.length > 0) {
-          setIsCompany(true);
-          setCompanyData({
-            id: response.data.companyIds[0]._id,
-            name: response.data.companyIds[0].name
-          });
-          console.log("Company ids : ", companyData)
+          setWebsites(response.data.companyIds);
         }
         else {
           navigate('/create-company');
@@ -68,9 +56,8 @@ function MainPage() {
         <p>My Websites</p>
         <ul>
           {websites.map((website, index) => (
-            <li key={index} id="sites" onClick={() => handleSiteClick(website)}>
-              {website.name} : <a href={website.url} target="_blank" rel="noopener noreferrer">{website.url}</a>
-            </li>
+            <li key={index} id="sites" >
+              {website.name} <button onClick={() => handleSiteClick(website)} >View More</button> </li>
           ))}
         </ul>
       </div>

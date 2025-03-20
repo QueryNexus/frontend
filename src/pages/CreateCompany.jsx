@@ -126,7 +126,7 @@ function CreateCompany() {
     console.log(companyData);
     try {
       const response = await axios.post(
-        "http://localhost:8080/company",
+        "https://backend-snowy-mu.vercel.app/company",
         companyData,
         {
           headers: {

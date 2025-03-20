@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import logo from './../assets/logo.jpg';
 import "./../styles/Navbar.css";
-import { Link, useNavigate} from 'react-router-dom';
-import axios from 'axios';
 
 function Navbar() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
     const [showLogout, setShowLogout] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [profileOpen, setProfileOpen] = useState(false);
-    const navigate = useNavigate();
 
     console.log(user);
 
@@ -22,37 +18,6 @@ function Navbar() {
       setMenuOpen(!menuOpen);
     };
 
-    const handleProfileClick = () => {
-      setProfileOpen(!profileOpen);
-    }
-
-    useEffect(() => {
-      const getUserData = async() => {
-        if (isAuthenticated && user){
-          const userData = {
-            uid: user.sub,
-            email: user.email,
-            name: user.name,
-            photo: user.picture
-          };
-
-          try{
-            const response = await axios.post('http://localhost:8080/user', userData, {
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            });
-            console.log('User data sent successfully:', response.data);
-            navigate('/dashboard');
-          }
-          catch (error) {
-            console.error('Error sending user data:', error);
-          }
-        }
-      };
-
-      getUserData();
-    }, [isAuthenticated, user, navigate]);
       
 
   return (

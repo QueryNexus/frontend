@@ -17,7 +17,7 @@ function AddSite() {
     e.preventDefault();
     try {
       // Send the new website entry to the backend
-      const response = await axios.post('http://localhost:8080/newSite', newWebsite);
+      const response = await axios.post('https://backend-snowy-mu.vercel.app/newSite', newWebsite);
       console.log('Response from backend:', response.data);
 
       // Update the state with the new website entry

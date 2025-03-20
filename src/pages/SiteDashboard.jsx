@@ -8,8 +8,6 @@ import "./../styles/SiteDashboard.css";
 import axios from "axios";
 
 function SiteDashboard() {
-  // const location = useLocation();
-  // const initialSite = location.state.site;
   const [site, setSite] = useState({
     id: "",
     name: "",
@@ -17,8 +15,7 @@ function SiteDashboard() {
     description: ""
   });
   const [activeNavItem, setActiveNavItem] = useState("My Company");
-  const { id } = useParams();
-  console.log(id);
+  const { companyId } = useParams();
 
   const handleNavItemClick = (item) => {
     setActiveNavItem(item);
@@ -28,7 +25,7 @@ function SiteDashboard() {
     const fetchData = async () => {
       try {
         // Make a GET request to the backend with the id as data
-        const response = await axios.get(`http://localhost:8080/company/67bcd1080c9cb95d46c85c8a`);
+        const response = await axios.get(`https://backend-snowy-mu.vercel.app/company/${companyId}`);
         console.log('Request sent successfully:', response.data);
         const { id, name, website, description } = response.data.company;
         
@@ -45,8 +42,11 @@ function SiteDashboard() {
       }
     };
 
-    fetchData();
-  }, [id]);
+    if (companyId) {
+      console.log("id:", companyId);
+      fetchData();
+    }
+  }, [companyId]);
 
   return (
     site != null ? (
