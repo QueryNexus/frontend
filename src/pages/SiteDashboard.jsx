@@ -6,6 +6,7 @@ import IMPS from "./site-pages/Imps";
 import APIKey from "./site-pages/ApiKey";
 import "./../styles/SiteDashboard.css";
 import axios from "axios";
+import Loader from "./../components/Loader";
 
 function SiteDashboard() {
   const [site, setSite] = useState({
@@ -16,6 +17,7 @@ function SiteDashboard() {
   });
   const [activeNavItem, setActiveNavItem] = useState("My Company");
   const { companyId } = useParams();
+  const [loading, setLoading] = useState(true);
 
   const handleNavItemClick = (item) => {
     setActiveNavItem(item);
@@ -24,6 +26,7 @@ function SiteDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         // Make a GET request to the backend with the id as data
         const response = await axios.get(`https://backend-snowy-mu.vercel.app/company/${companyId}`);
         console.log('Request sent successfully:', response.data);
@@ -39,6 +42,8 @@ function SiteDashboard() {
         console.log(site);
       } catch (error) {
         console.error('Error sending data:', error);
+      } finally{
+        setLoading(false);
       }
     };
 
@@ -49,6 +54,7 @@ function SiteDashboard() {
   }, [companyId]);
 
   return (
+    loading ? (<Loader />) : (
     site != null ? (
       <div className="site-dashboard">
         <div className="left-navbar">
@@ -98,6 +104,7 @@ function SiteDashboard() {
     ) : (
       <></>
     )
+  )
   );
 }
 

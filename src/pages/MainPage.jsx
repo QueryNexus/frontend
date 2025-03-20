@@ -4,10 +4,12 @@ import user_image from "./../assets/user_image.png";
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
+import Loader from "./../components/Loader";
 
 function MainPage() {
   const { user, isAuthenticated } = useAuth0();
  const [websites, setWebsites] = useState([]);
+ const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -22,6 +24,7 @@ function MainPage() {
   useEffect(() => {
     const fetchData = async () => {
       try{
+        setLoading(true);
         const response = await axios.post('https://backend-snowy-mu.vercel.app/usercompany', { uid: user.sub });
         console.log("Checked User Company : ", response.data);
         
@@ -35,6 +38,9 @@ function MainPage() {
       catch(error){
         console.error('Error fetching user data:', error);
       }
+      finally{
+        setLoading(false);
+      }
   };
   if (isAuthenticated) {
     fetchData();
@@ -42,7 +48,8 @@ function MainPage() {
   }, [isAuthenticated, user, navigate]);
 
   return (
-    <div className="main-page">
+    loading ? (<Loader />) : 
+    (<div className="main-page">
       <div className="top">
         <img src={user_image} alt="user image" className="user-logo" />
         <div className="user-info">
@@ -75,6 +82,7 @@ function MainPage() {
         <span>Add</span>
       </button>
     </div>
+    )
   )
 }
 

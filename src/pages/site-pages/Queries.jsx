@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import "./styles/Queries.css";
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Loader from './../../components/Loader';
 
 function Queries() {
-  const data = {
+  const [queryData, setQueryData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { companyId } = useParams();
+
+  const chartData = {
     labels: ['Critical, Solved, Unsolved'],
     datasets: [
       {
@@ -17,22 +24,45 @@ function Queries() {
     ],
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.post(`https://backend-snowy-mu.vercel.app/query/${companyId}`);
+        console.log('Query Data fetched successfully:', response.data);
+        setQueryData(response.data.history);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
+    loading ? (<Loader />) : (
     <div className="queries-container">
       <div className="top">
-        <Pie data={data} />
+        <Pie data={chartData} />
       </div>
+      
       <div className="bottom">
-        <div className="info-box">Information 1</div>
-        <div className="info-box">Information 2</div>
-        <div className="info-box">Information 3</div>
-        <div className="info-box">Information 4</div>
-        <div className="info-box">Information 1</div>
-        <div className="info-box">Information 2</div>
-        <div className="info-box">Information 3</div>
-        <div className="info-box">Information 4</div>
+        {loading ? (
+          <div className="loader">Loading...</div>
+        ) : (
+          queryData.map((item, index) => (
+            <div key={index} className="info-box">
+              <p><strong>Role:</strong> {item.role}</p>
+              <p><strong>Content:</strong> {item.content}</p>
+              <p><strong>Timestamp:</strong> {new Date(item.timestamp.$date).toLocaleString()}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
+    )
   );
 }
 
