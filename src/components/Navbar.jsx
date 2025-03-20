@@ -24,7 +24,7 @@ function Navbar() {
     <div className="navbar">
         <div className="nav-logo">
             <img src={logo} alt="Logo" className="logo" />
-            <p className="app-title">QueryNexus</p>
+            <p className="app-title"><a href='http://localhost:5173'>QueryNexus</a></p>
         </div>
 
         <button className="menu-button" onClick={toggleMenu}>
