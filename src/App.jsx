@@ -52,8 +52,7 @@ function App() {
   }, [isAuthenticated, user]);
 
   return (
-<>
-
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<PublicRoute element={<Landing />} />} />
@@ -63,7 +62,7 @@ function App() {
         <Route path="/create-company" element={<ProtectedRoute element={<CreateCompany />} />} />
         <Route path="/site-dashboard/:companyId" element={<ProtectedRoute element={<SiteDashboard />} />} />
       </Routes>
-      </>
+    </>
   );
 }
 
