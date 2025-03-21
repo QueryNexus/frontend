@@ -22,9 +22,11 @@
     align-items: center;
     width: 100%;
 }
-.user-image{
+
+
+/* .user-image{
     flex-shrink: 0;
-}
+} */
 .user-info{
     color: white;
     font-size: 1.5em;
@@ -70,7 +72,7 @@
 } */
 
 
-/* .user-logo{
+.user-logo{
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -78,7 +80,7 @@
     border: 4px solid red;
     object-fit: cover;
     flex-shrink: 0;
-} */
+}
 
 /* @media(max-width: 550px){
     .top{

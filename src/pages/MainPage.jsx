@@ -52,9 +52,7 @@ function MainPage() {
     (<div className="main-page">
       <div className="content">
         <div className="top-div">
-          <div className="user-image">
-            <img src={user_image} alt="user image" className="user-logo" />
-          </div>
+          <img src={user_image} alt="user image" className="user-logo" />
           <div className="user-info">
             <p>User ID : {user.sub}</p>
             <p>Name : {user.name}</p>

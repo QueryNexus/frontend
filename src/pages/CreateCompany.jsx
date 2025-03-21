@@ -3,10 +3,13 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./styles/CreateCompany.css";
 import { useNavigate } from "react-router-dom";
+import Loader from "./../components/Loader";
 
 function CreateCompany() {
   const { user, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const [companyData, setCompanyData] = useState({
     uid: user.sub,
     name: "",
@@ -125,6 +128,7 @@ function CreateCompany() {
     e.preventDefault();
     console.log(companyData);
     try {
+      setLoading(true);
       const response = await axios.post(
         "https://backend-snowy-mu.vercel.app/company",
         companyData,
@@ -139,11 +143,14 @@ function CreateCompany() {
     } catch (error) {
       console.error("Error sending company data:", error);
       alert("Error sending company data. Please try again.");
+    } finally{ 
+      setLoading(false);
     }
   };
 
   return (
-    <div className="create-company">
+    loading ? <Loader /> : 
+    (<div className="create-company">
       <h2>Create Company</h2>
 
       <form onSubmit={handleFormSubmit}>
@@ -511,6 +518,7 @@ function CreateCompany() {
         <button type="submit">Create Company</button>
       </form>
     </div>
+    )
   );
 }
 
