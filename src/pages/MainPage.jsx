@@ -50,23 +50,27 @@ function MainPage() {
   return (
     loading ? (<Loader />) : 
     (<div className="main-page">
-      <div className="top">
-        <img src={user_image} alt="user image" className="user-logo" />
-        <div className="user-info">
-          <p>User ID : {user.sub}</p>
-          <p>Name : {user.name}</p>
-          <p>Email : {user.email}</p>
+      <div className="content">
+        <div className="top-div">
+          <div className="user-image">
+            <img src={user_image} alt="user image" className="user-logo" />
+          </div>
+          <div className="user-info">
+            <p>User ID : {user.sub}</p>
+            <p>Name : {user.name}</p>
+            <p>Email : {user.email}</p>
+          </div>
         </div>
-      </div>
 
-      <div className="bottom">
-        <p>My Websites</p>
-        <ul>
-          {websites.map((website, index) => (
-            <li key={index} id="sites" >
-              {website.name} <button onClick={() => handleSiteClick(website)} >View More</button> </li>
-          ))}
-        </ul>
+        <div className="bottom">
+          <p>My Websites</p>
+          <ul>
+            {websites.map((website, index) => (
+              <li key={index} id="sites" >
+                {website.name} <button onClick={() => handleSiteClick(website)} >View More</button> </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <button className="cssbuttons-io-button" onClick={handleAddSiteClick}>
