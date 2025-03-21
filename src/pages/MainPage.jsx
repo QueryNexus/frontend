@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./../styles/MainPage.css";
+import "./styles/MainPage.css";
 import user_image from "./../assets/user_image.png";
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";

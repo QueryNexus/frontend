@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import MyCompany from "./site-pages/MyCompany";
-import Queries from "./site-pages/Queries";
-import IMPS from "./site-pages/Imps";
-import APIKey from "./site-pages/ApiKey";
-import "./../styles/SiteDashboard.css";
+import MyCompany from "./../site-pages/MyCompany";
+import Queries from "./../site-pages/Queries";
+import IMPS from "./../site-pages/Imps";
+import APIKey from "./../site-pages/ApiKey";
+import "./styles/SiteDashboard.css";
 import axios from "axios";
 import Loader from "./../components/Loader";
 

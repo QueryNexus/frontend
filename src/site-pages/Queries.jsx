@@ -4,7 +4,7 @@ import 'chart.js/auto';
 import "./styles/Queries.css";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Loader from './../../components/Loader';
+import Loader from '../components/Loader';
 
 function Queries() {
   // const [queryData, setQueryData] = useState([]);
