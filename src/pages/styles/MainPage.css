@@ -125,3 +125,28 @@
 .cssbuttons-io-button:active {
     box-shadow: 0 0.3em 1em -0.5em #14a73e98;
 }
+
+@media(max-width : 850px){
+    .user-info{
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
+    .content{
+        margin-top: 35px;
+    }
+}
+
+
+@media(max-width: 650px){
+    .top-div{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        object-fit: cover;
+    }
+
+    .content{
+        margin-top: 35px;
+    }
+}
