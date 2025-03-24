@@ -1,13 +1,16 @@
-import React from 'react'
-import './styles/Landing.css'
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import './styles/Landing.css';
 
 function Landing() {
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <div className="landing-page">
       <section className="hero">
         <h1>Welcome to QueryNexus</h1>
         <p>Your AI-powered solution for seamless data management and insights.</p>
-        <button className="cta-button">Get Started</button>
+        <button className="cta-button" onClick={() => loginWithRedirect()}>Get Started</button>
       </section>
 
       <section id="features" className="features">
@@ -40,7 +43,7 @@ function Landing() {
         <p>&copy; 2025 QueryNexus. All rights reserved.</p>
       </footer>
     </div>
-  )
+  );
 }
 
-export default Landing
+export default Landing;
