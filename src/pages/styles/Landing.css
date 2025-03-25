@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   font-style: normal;
-  background-color: black;
+  background-color: #fafafa;
   color: white;
   box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
