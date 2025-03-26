@@ -42,36 +42,37 @@
 }
 
 
-.bottom {
+.bottom-div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 30px 200px 30px 100px;
 }
 
-.bottom p {
+.bottom-div p {
     color: black;
     font-size: 2rem;
 }
 
-.bottom ul {
+.bottom-div ul {
     color: black;
     list-style-type: none;
     padding: 0px;
-    width: calc(100% - 150px);
+    width: 100%;
 }
 
-.bottom li {
+.bottom-div li {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
     margin: 10px auto;
-    background-color: rgba(240, 248, 255);
+    background-color: rgb(195, 228, 255);
     border-radius: 10px;
     padding: 10px 20px;
 }
 
-.bottom button {
+.bottom-div button {
     margin-left: auto;
     justify-self: end;
 }
