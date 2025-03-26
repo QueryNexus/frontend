@@ -16,6 +16,7 @@
     transition: box-shadow 0.3s;
     backdrop-filter: blur(12px); /* Apply blur effect */
     z-index: 1000; /* Ensure the navbar is above other content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-shadow {
