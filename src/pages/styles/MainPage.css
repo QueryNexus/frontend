@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.main-page{
+.main-page {
     font-family: "Poppins", sans-serif;
     font-style: normal;
     display: flex;
@@ -14,12 +14,13 @@
 .content {
     margin-top: 100px;
     display: flex;
-    flex-direction: column; /* Stack child elements vertically */
+    flex-direction: column;
+    /* Stack child elements vertically */
     width: 100%;
 }
 
 
-.top-div{
+.top-div {
     margin: 20px 100px;
     border-radius: 10px;
     display: flex;
@@ -34,37 +35,44 @@
 /* .user-image{
     flex-shrink: 0;
 } */
-.user-info{
+.user-info {
     color: black;
     font-size: 1.4em;
     font-weight: 500;
 }
 
 
-.bottom{
+.bottom {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.bottom p{
+
+.bottom p {
     color: black;
     font-size: 2rem;
 }
-.bottom ul{
+
+.bottom ul {
     color: black;
     list-style-type: none;
     padding: 0px;
-    width: 20%;
+    width: calc(100% - 150px);
 }
-.bottom li{
-    display: grid;
-    grid-template-columns: 1fr auto;
+
+.bottom li {
+    display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    gap: 10px;
     width: 100%;
+    margin: 10px auto;
+    background-color: rgba(240, 248, 255);
+    border-radius: 10px;
+    padding: 10px 20px;
 }
-.bottom button{
-    margin-left: 10px;
+
+.bottom button {
+    margin-left: auto;
     justify-self: end;
 }
 
@@ -80,7 +88,7 @@
 } */
 
 
-.user-logo{
+.user-logo {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -97,7 +105,7 @@
     }
 } */
 
-/* From Uiverse.io by adamgiebl */ 
+/* From Uiverse.io by adamgiebl */
 .cssbuttons-io-button {
     position: fixed;
     bottom: 20px;
@@ -111,50 +119,48 @@
     padding: 0.7em 1.4em 0.7em 1.1em;
     color: white;
     background: #ad5389;
-    background: linear-gradient(
-      0deg,
-      rgba(20, 167, 62, 1) 0%,
-      rgba(102, 247, 113, 1) 100%
-    );
+    background: linear-gradient(0deg,
+            rgba(20, 167, 62, 1) 0%,
+            rgba(102, 247, 113, 1) 100%);
     border: none;
     box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
     letter-spacing: 0.05em;
     border-radius: 20em;
 }
-  
+
 .cssbuttons-io-button svg {
     margin-right: 6px;
 }
-  
+
 .cssbuttons-io-button:hover {
     box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
 }
-  
+
 .cssbuttons-io-button:active {
     box-shadow: 0 0.3em 1em -0.5em #14a73e98;
 }
 
-@media(max-width : 850px){
-    .user-info{
+@media(max-width : 850px) {
+    .user-info {
         font-size: 1rem;
         margin-top: 15px;
     }
 
-    .content{
+    .content {
         margin-top: 35px;
     }
 }
 
 
-@media(max-width: 650px){
-    .top-div{
+@media(max-width: 650px) {
+    .top-div {
         flex-direction: column;
         align-items: center;
         justify-content: center;
         object-fit: cover;
     }
 
-    .content{
+    .content {
         margin-top: 35px;
     }
 }

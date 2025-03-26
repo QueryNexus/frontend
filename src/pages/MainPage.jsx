@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import Loader from "./../components/Loader";
+import { FaGlobe } from 'react-icons/fa';
 
 function MainPage() {
   const { user, isAuthenticated } = useAuth0();
@@ -64,8 +65,10 @@ function MainPage() {
           <p>My Websites</p>
           <ul>
             {websites.map((website, index) => (
-              <li key={index} id="sites" >
-                {website.name} <button onClick={() => handleSiteClick(website)} >View More</button> </li>
+              <li key={index} id="sites"  >
+                <FaGlobe/>
+                <span>{website.name}</span>
+                 <button onClick={() => handleSiteClick(website)} >View More</button> </li>
             ))}
           </ul>
         </div>
