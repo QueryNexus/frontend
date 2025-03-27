@@ -7,6 +7,7 @@ import APIKey from "./../site-pages/ApiKey";
 import "./styles/SiteDashboard.css";
 import axios from "axios";
 import Loader from "./../components/Loader";
+import Check from "./../site-pages/Check";
 
 function SiteDashboard() {
   const [site, setSite] = useState({
@@ -89,6 +90,14 @@ function SiteDashboard() {
             >
               API Key
             </li>
+            <li
+              className={`nav-item ${
+                activeNavItem === "API Key" ? "active" : ""
+              }`}
+              onClick={() => handleNavItemClick("Test Query")}
+            >
+              Test Query
+            </li>
           </ul>
         </div>
 
@@ -99,6 +108,7 @@ function SiteDashboard() {
           {activeNavItem === "Queries" && <Queries />}
           {activeNavItem === "IMPS" && <IMPS />}
           {activeNavItem === "API Key" && <APIKey />}
+          {activeNavItem === "Test Query" && <Check />}
         </div>
       </div>
     ) : (
