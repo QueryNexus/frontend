@@ -30,7 +30,7 @@ function SiteDashboard() {
         // Make a GET request to the backend with the id as data
         const response = await axios.get(`https://backend-snowy-mu.vercel.app/company/${companyId}`);
         console.log('Request sent successfully:', response.data);
-        const { id, name, website, description } = response.data.company;
+        const { id, name, website, description } = response.data;
         
         setSite((prevSite) => ({
           ...prevSite, // spread the previous state
