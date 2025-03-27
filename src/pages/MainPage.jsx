@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import Loader from "./../components/Loader";
+import { FaGlobe } from 'react-icons/fa';
 
 function MainPage() {
   const { user, isAuthenticated } = useAuth0();
@@ -60,18 +61,20 @@ function MainPage() {
           </div>
         </div>
 
-        <div className="bottom">
+        <div className="bottom-div">
           <p>My Websites</p>
           <ul>
             {websites.map((website, index) => (
-              <li key={index} id="sites" >
-                {website.name} <button onClick={() => handleSiteClick(website)} >View More</button> </li>
+              <li key={index} id="sites"  >
+                <FaGlobe/>
+                <span>{website.name}</span>
+                 <button className='text-white' onClick={() => handleSiteClick(website)} >View More</button> </li>
             ))}
           </ul>
         </div>
       </div>
 
-      <button className="cssbuttons-io-button" onClick={handleAddSiteClick}>
+      <button className=" cssbuttons-io-button" onClick={handleAddSiteClick}>
         <svg
           height="24"
           width="24"
@@ -81,7 +84,7 @@ function MainPage() {
           <path d="M0 0h24v24H0z" fill="none"></path>
           <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
         </svg>
-        <span>Add</span>
+        <span >Add</span>
       </button>
     </div>
     )
