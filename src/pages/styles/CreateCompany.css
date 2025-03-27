@@ -1,70 +1,209 @@
+/* Main Container */
 .create-company {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 150px;
   padding: 20px;
-  background: black;
-  color: white;
+  background-color: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
 }
 
+/* Header */
 .create-company h2 {
+  text-align: center;
   margin-bottom: 20px;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 400;
-  align-self: center;
+  color: blue;
+  font-size: 28px;
+  font-weight: 600;
 }
 
-.create-company form {
+/* Progress Bar */
+.progress-bar {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-input, textarea, select {
-  height: 3rem;
-  width: 20rem;
-  margin-left: 5px;
-  margin-right: 5px;
-  padding-left: 20px;
-  margin-top: 5px;
-  /* border: 1px solid red; */
-  border-radius: 50px;
-  background: grey;
-  cursor: pointer;
-}
-textarea {
-  resize: none;
-}
-
-
-.create-company button {
-  margin-top: 10px;
+.progress-step {
+  flex: 1;
+  text-align: center;
   padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.progress-step.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.progress-step:not(:last-child) {
+  margin-right: 10px;
+}
+
+/* Form Fields */
+.field-divs {
+  margin-bottom: 15px;
+}
+
+.field-divs label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.field-divs input,
+.field-divs select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.field-divs input:focus,
+.field-divs select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Buttons */
+.field-divs button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background: #007bff;
-  color: white;
+  font-size: 14px;
 }
 
-input{
-  background: grey;
-  color: white;
+.field-divs button:hover {
+  background-color: #0056b3;
 }
 
-::placeholder {
-  color: white;
-  align-self: center;
+/* Branch and Other Details */
+.branch,
+.other-detail {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
-.field-divs {
+.branch label,
+.other-detail label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.branch input,
+.other-detail input {
+  width: calc(100% - 20px);
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.branch button,
+.other-detail button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.branch button:hover,
+.other-detail button:hover {
+  background-color: #c82333;
+}
+
+/* Submit Button */
+.create-company form button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.create-company form button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Form Navigation Buttons */
+.form-navigation {
   display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+  justify-content: space-between;
+  margin-top: 20px;
 }
- label{
-  margin-left: 10px;
- }
+
+.form-navigation button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.form-navigation button:hover {
+  opacity: 0.9;
+}
+
+.form-navigation button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+}
+
+.form-navigation button[type="button"] {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .create-company {
+    padding: 15px;
+  }
+
+  .field-divs input,
+  .field-divs select {
+    font-size: 12px;
+  }
+
+  .branch input,
+  .other-detail input {
+    font-size: 12px;
+  }
+
+  .branch button,
+  .other-detail button {
+    font-size: 12px;
+  }
+
+  .create-company form button[type="submit"] {
+    font-size: 14px;
+  }
+}
