@@ -354,7 +354,6 @@ function CreateCompany() {
         <label>Postal Code</label>
         <input
           legend="Postal Code"
-          inputStyle="box"
           type="text"
           name="address.postal_code"
           placeholder="Enter Postal Code"

@@ -19,7 +19,7 @@ function MainPage() {
   };
 
   const handleAddSiteClick = () => {
-    navigate('/add-site');
+    navigate('/create-company');
   }
 
   useEffect(() => {
