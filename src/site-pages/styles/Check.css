@@ -18,6 +18,9 @@
 .output-group {
   margin-bottom: 20px;
 }
+.output-group{
+  margin-top: 20px;
+}
 
 .input-group label,
 .output-group label {
@@ -46,7 +49,7 @@
 
 .output-group textarea {
   resize: none;
-  height: 100px;
+  height: auto;
   background-color: #f0f0f0;
 }
 
