@@ -92,7 +92,7 @@ function SiteDashboard() {
             </li>
             <li
               className={`nav-item ${
-                activeNavItem === "API Key" ? "active" : ""
+                activeNavItem === "Test Query" ? "active" : ""
               }`}
               onClick={() => handleNavItemClick("Test Query")}
             >
