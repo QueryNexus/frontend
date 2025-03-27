@@ -2,10 +2,7 @@ import React from 'react';
 import "./styles/ApiKey.css";
 
 const apiDetails = [
-  { name: 'API 1', url: 'https://api1.example.com', description: 'Description for API 1' },
-  { name: 'API 2', url: 'https://api2.example.com', description: 'Description for API 2' },
-  { name: 'API 3', url: 'https://api3.example.com', description: 'Description for API 3' },
-  // Add more API details as needed
+  { name: 'API Key', url: 'https://querynexus-snowy-mu.vercel.app', description: 'This is the api key that will be used by company to use querynexus services.' }
 ];
 
 function APIKey() {
