@@ -284,6 +284,33 @@ function CreateCompany() {
               />
             </div>
             <div className="field-divs">
+              <label>State</label>
+              <input
+                type="text"
+                name="address.state"
+                value={companyData.address.state}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>Country</label>
+              <input
+                type="text"
+                name="address.country"
+                value={companyData.address.country}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>Postal Code</label>
+              <input
+                type="text"
+                name="address.postal_code"
+                value={companyData.address.postal_code}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
               <label>CEO Name</label>
               <input
                 type="text"
@@ -301,6 +328,42 @@ function CreateCompany() {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="field-divs">
+              <label>CFO Name</label>
+              <input
+                type="text"
+                name="board_members.cfo"
+                value={companyData.board_members.cfo}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>CMO Name</label>
+              <input
+                type="text"
+                name="board_members.cmo"
+                value={companyData.board_members.cmo}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>Founded Year</label>
+              <input
+                type="text"
+                name="founded_year"
+                value={companyData.founded_year}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>Company Size</label>
+              <input
+                type="text"
+                name="company_size"
+                value={companyData.company_size}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
         )}
 
@@ -313,6 +376,22 @@ function CreateCompany() {
               <textarea
                 name="privacy_policy"
                 value={companyData.privacy_policy}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>Services Provided in : </label>
+              <textarea
+                name="services_provided_in"
+                value={companyData.services_provided_in}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>Expected Service Time </label>
+              <textarea
+                name="expected_service_time"
+                value={companyData.expected_service_time}
                 onChange={handleInputChange}
               />
             </div>
@@ -372,6 +451,24 @@ function CreateCompany() {
                 type="text"
                 name="social_media.twitter"
                 value={companyData.social_media.twitter}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>Facebook</label>
+              <input
+                type="text"
+                name="social_media.facebook"
+                value={companyData.social_media.facebook}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="field-divs">
+              <label>Instagram</label>
+              <input
+                type="text"
+                name="social_media.instagram"
+                value={companyData.social_media.instagram}
                 onChange={handleInputChange}
               />
             </div>
