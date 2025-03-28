@@ -1,0 +1,15 @@
+.edit-button, .save-button {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-button:hover, .save-button:hover {
+    background-color: #0056b3;
+  }

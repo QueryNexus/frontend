@@ -28,7 +28,7 @@
 
 .nav-item {
   cursor: pointer;
-  margin-top: 6vw;
+  margin-top: 4vw;
   padding: 8px 14px;
   box-shadow: rgba(0, 87, 179, 0.8) 0px 0px 10px;
   border-radius: 5px;
@@ -55,22 +55,6 @@
   margin-left: 20%;
   /* background-color: rgb(180, 222, 255); */
   padding: 20px;
-  position: fixed;
-  width: 100%;
-}
-
-.edit-button, .save-button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.edit-button:hover, .save-button:hover {
-  background-color: #0056b3;
+  /* position: fixed; */
+  width: 80%;
 }

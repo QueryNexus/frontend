@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./styles/MyCompany.css"
 
 function MyCompany({ site, setSite }) {
   const [isEditing, setIsEditing] = useState(false);
