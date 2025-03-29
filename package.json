@@ -13,6 +13,8 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
     "@aws-amplify/cli": "^12.14.4",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.0.17",
     "axios": "^1.7.9",
     "chart.js": "^4.4.8",
