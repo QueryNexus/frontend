@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
-import "./styles/Queries.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -9,23 +8,39 @@ import Loader from "../components/Loader";
 function Queries() {
   const [queryData, setQueryData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [labels, setLabels] = useState([]);
   const { companyId } = useParams();
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  // 🎯 Fixed Categories List
+  const categoryOptions = [
+    "High Priority",
+    "Follow-Up Required",
+    "Resolved",
+    "Duplicate Query",
+    "Needs Escalation",
+    "Spam",
+    "Feedback/Compliment",
+  ];
 
   const [chartData, setChartData] = useState({
-    labels: ["Resolved", "Unresolved", "Critical"],
+    labels: categoryOptions,
     datasets: [
       {
         label: "# of Queries",
-        data: [0, 0, 0],
-        backgroundColor: ["rgb(0, 247, 0)", "rgb(255, 0, 0)", "rgb(4, 0, 255)"],
-        borderColor: ["rgb(0, 247, 0)", "rgb(255, 0, 0)", "rgb(4, 0, 255)"],
+        data: Array(categoryOptions.length).fill(0), // Initialize with zeros
+        backgroundColor: categoryOptions.map(
+          (_, index) => `hsl(${(index * 360) / categoryOptions.length}, 70%, 50%)`
+        ),
+        borderColor: categoryOptions.map(
+          (_, index) => `hsl(${(index * 360) / categoryOptions.length}, 70%, 40%)`
+        ),
         borderWidth: 1,
       },
     ],
   });
 
+  // 🚀 Fetch Data
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -33,27 +48,33 @@ function Queries() {
         `https://backend-snowy-mu.vercel.app/query/${companyId}`
       );
       console.log("Query Data fetched successfully:", response.data.queries);
-      const uniqueCategories = [
-        ...new Set(response.data.queries.map((item) => item.category)),
-      ];
-      setLabels(uniqueCategories);
-      setQueryData(response.data.queries);
 
-      const categoryCounts = uniqueCategories.map((category) =>
-        response.data.queries.filter((item) => item.category === category).length
+      // Filter data only with relevant categories
+      const validQueries = response.data.queries.filter((item) =>
+        categoryOptions.includes(item.category)
       );
 
+      setQueryData(validQueries);
+
+      // Count category occurrences for Pie Chart
+      const categoryCounts = categoryOptions.map(
+        (category) => validQueries.filter((item) => item.category === category).length
+      );
+
+      // Update Chart Data
       setChartData({
-        labels: uniqueCategories,
+        labels: categoryOptions,
         datasets: [
           {
             label: "# of Queries",
             data: categoryCounts,
-            backgroundColor: uniqueCategories.map((_, index) =>
-              `hsl(${(index * 360) / uniqueCategories.length}, 70%, 50%)`
+            backgroundColor: categoryOptions.map(
+              (_, index) =>
+                `hsl(${(index * 360) / categoryOptions.length}, 70%, 50%)`
             ),
-            borderColor: uniqueCategories.map((_, index) =>
-              `hsl(${(index * 360) / uniqueCategories.length}, 70%, 40%)`
+            borderColor: categoryOptions.map(
+              (_, index) =>
+                `hsl(${(index * 360) / categoryOptions.length}, 70%, 40%)`
             ),
             borderWidth: 1,
           },
@@ -70,12 +91,12 @@ function Queries() {
     fetchData();
   }, []);
 
-  const [expandedIndex, setExpandedIndex] = useState(null);
-
+  // 📚 Toggle Read More / Less
   const toggleReadMore = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
+  // 🎯 Handle Category Selection
   const handleCategoryChange = (category) => {
     setSelectedCategories((prevSelected) =>
       prevSelected.includes(category)
@@ -84,74 +105,97 @@ function Queries() {
     );
   };
 
+  // 🔍 Filtered Data Based on Selected Categories
   const filteredQueryData =
     selectedCategories.length === 0
       ? queryData
       : queryData.filter((item) => selectedCategories.includes(item.category));
 
-      return loading ? (
-        <Loader />
-      ) : (
-        <div className="queries-container">
-          <div className="top">
-            <h2>Query Statistics</h2>
+  return loading ? (
+    <Loader />
+  ) : (
+    <div className="text-white min-h-screen">
+      {/* Top Section - Pie Chart */}
+      <div className="mb-8 bg-gray-800/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-gray-700">
+        <h2 className="text-3xl font-bold text-blue-400 mb-6 tracking-wide">
+          📊 Query Statistics
+        </h2>
+        <div className="flex justify-center">
+          <div className="w-72 md:w-96">
             <Pie data={chartData} />
           </div>
-      
-          <div className="bottom">
-            <div className="filter-section">
-              <h3>Filter by Category</h3>
-              <div className="checkbox-container">
-                {labels.map((category, index) => (
-                  <label key={index} className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      value={category}
-                      checked={selectedCategories.includes(category)}
-                      onChange={() => handleCategoryChange(category)}
-                    />
-                    {category}
-                  </label>
-                ))}
-              </div>
-            </div>
-      
-            <h2>Query Details</h2>
-            {filteredQueryData.length === 0 ? (
-              <p>No queries found.</p>
-            ) : (
-              <div className="query-cards-container">
-                {filteredQueryData.map((item, index) => (
-                  <div key={index} className="info-box">
-                    <p>
-                      <strong>Query:</strong> {item.query}
-                    </p>
-                    <p>
-                      <strong>Response:</strong>{" "}
-                      {expandedIndex === index
-                        ? item.response
-                        : `${item.response.substring(0, 100)}...`}{" "}
-                      <span
-                        className="read-more"
-                        onClick={() => toggleReadMore(index)}
-                      >
-                        {expandedIndex === index ? "Show Less" : "Read More"}
-                      </span>
-                    </p>
-                    <p>
-                      <strong>Category:</strong> {item.category}
-                    </p>
-                    <p>
-                      <strong>Created At:</strong>{" "}
-                      {new Date(item.createdAt).toLocaleString()}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
-      );
+      </div>
+
+      {/* Filter Section */}
+      <div className="bg-gray-800/80 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-gray-700 mb-8">
+        <h3 className="text-2xl font-semibold mb-4 text-blue-400">
+          🎯 Filter by Category
+        </h3>
+        <div className="flex flex-wrap gap-4">
+          {categoryOptions.map((category, index) => (
+            <label
+              key={index}
+              className={`px-4 py-2 rounded-full text-sm cursor-pointer transition-all duration-300 ${
+                selectedCategories.includes(category)
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-700 hover:bg-gray-600 text-gray-300"
+              }`}
+            >
+              <input
+                type="checkbox"
+                value={category}
+                checked={selectedCategories.includes(category)}
+                onChange={() => handleCategoryChange(category)}
+                className="hidden"
+              />
+              {category}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Query Details Section */}
+      <div className="bg-gray-800/80 backdrop-blur-lg p-8 rounded-2xl shadow-lg border border-gray-700">
+        <h2 className="text-3xl font-bold text-blue-400 mb-6">📚 Query Details</h2>
+        {filteredQueryData.length === 0 ? (
+          <p className="text-lg text-gray-400">No queries found for the selected category.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredQueryData.map((item, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 p-6 rounded-lg shadow-md hover:shadow-xl transition-transform transform hover:-translate-y-1 duration-300"
+              >
+                <p className="text-lg mb-2">
+                  <strong className="text-blue-500">Query:</strong> {item.query}
+                </p>
+                <p className="text-gray-300 mb-2">
+                  <strong className="text-blue-500">Response:</strong>{" "}
+                  {expandedIndex === index
+                    ? item.response
+                    : `${item.response.substring(0, 100)}...`}
+                  <span
+                    className="text-blue-400 ml-2 cursor-pointer hover:underline"
+                    onClick={() => toggleReadMore(index)}
+                  >
+                    {expandedIndex === index ? "Show Less" : "Read More"}
+                  </span>
+                </p>
+                <p className="text-gray-400 mb-2">
+                  <strong className="text-blue-500">Category:</strong> {item.category}
+                </p>
+                <p className="text-gray-400">
+                  <strong className="text-blue-500">Created At:</strong>{" "}
+                  {new Date(item.createdAt).toLocaleString()}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Queries;
